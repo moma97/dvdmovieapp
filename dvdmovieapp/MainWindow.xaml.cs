@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dvdmovieapp.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace dvdmovieapp
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void btnOk_Click(object sender, RoutedEventArgs e)
+        {
+            // select * from film
+            // få tillbaka lista med alla filmer i min databas
+            // repository pattern = en slags yta där jag kan skapa kopplingar till olika saker
+
+
+            DbRepository db = new();
+            var film = await db.GetFilm();
+
         }
     }
 }
