@@ -4,21 +4,23 @@ using Npgsql;
 using System.Threading.Tasks;
 
 namespace dvdmovieapp.DAL
-{
+{ 
     public class DbRepository
-    {
+    { 
         private readonly string _connectionString;
 
 
         public DbRepository()
         {
-       
+
 
             var config = new ConfigurationBuilder().AddUserSecrets<DbRepository>().Build();
             _connectionString = config.GetConnectionString("develop");
 
 
         }
+        //CRUD 
+        #region Read
         public async Task<Film> GetFilm() //skapa en metod för att hämta filmerna
         {
             // hur jag hämtar filmer från databas
@@ -36,7 +38,7 @@ namespace dvdmovieapp.DAL
             //kopplingsträng
             //i den har vi lösen och anv namn
             Film film = new Film();
-            while(await reader.ReadAsync())
+            while (await reader.ReadAsync())
             {
                 film = new Film()
                 {
@@ -47,10 +49,51 @@ namespace dvdmovieapp.DAL
                 };
             }
 
-            return film; 
+            return film;
 
 
         }
+        #endregion
+
+
+
+        public async Task AddCategory(Category category)
+        {
+            {// Ni får aldrig skicka in parametrar på detta sätt i en databas!
+               //string stmt = $"insert into category(name) values ({category.Name})";
+
+                string stmt = "insert into category(name) values(@name)";
+                await using var dataSource = NpgsqlDataSource.Create(_connectionString);
+
+                await using var command = dataSource.CreateCommand(stmt);
+                command.Parameters.AddWithValue("name", category.Name);
+                await command.ExecuteNonQueryAsync();
+
+            }
+        }
+
+
 
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

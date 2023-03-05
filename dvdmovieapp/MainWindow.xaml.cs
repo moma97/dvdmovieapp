@@ -1,4 +1,5 @@
 ﻿using dvdmovieapp.DAL;
+using dvdmovieapp.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace dvdmovieapp
             InitializeComponent();
         }
 
-        private async void btnOk_Click(object sender, RoutedEventArgs e)
+        public async void btnOk_Click(object sender, RoutedEventArgs e)
         {
             // select * from film
             // få tillbaka lista med alla filmer i min databas
@@ -34,8 +35,14 @@ namespace dvdmovieapp
 
 
             DbRepository db = new();
-            var film = await db.GetFilm();
+            //var film = await db.GetFilm();
 
+
+            var category = new Category();
+            {
+                Name = "spökhistorier";
+            };
+            await db.AddCategory(category);
         }
     }
 }
