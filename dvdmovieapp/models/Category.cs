@@ -10,6 +10,6 @@ namespace dvdmovieapp.models
     {
         public int Category_id { get; set; }
         public string Name { get; set; }
-        public string? Test { get; set; }
+        
     }
 }

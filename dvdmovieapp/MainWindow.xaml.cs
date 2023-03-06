@@ -35,14 +35,25 @@ namespace dvdmovieapp
 
 
             DbRepository db = new();
-            //var film = await db.GetFilm();
+            var film = await db.GetFilms();
 
 
-            var category = new Category();
+            var category = new Category()
             {
-                Name = "spökhistorier";
+                Name = "barn"
             };
-            await db.AddCategory(category);
+
+
+            try
+            {
+               //category = await db.AddCategory2(category);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);    
+                
+            }
+            
         }
     }
 }
