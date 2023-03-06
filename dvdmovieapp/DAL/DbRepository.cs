@@ -145,9 +145,9 @@ namespace dvdmovieapp.DAL
             {// Ni får aldrig skicka in parametrar på detta sätt i en databas!
                 try
                 {
-                    string stmt = $"insert into category(name) values ({category.Name})";
+                   
 
-                    stmt = "insert into category(name) values(@name)";
+                    string stmt = "insert into category(name) values(@name returning category_id";
                     await using var dataSource = NpgsqlDataSource.Create(_connectionString);
 
                     await using var command = dataSource.CreateCommand(stmt);
