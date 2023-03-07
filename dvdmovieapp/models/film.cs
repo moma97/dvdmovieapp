@@ -16,7 +16,8 @@ namespace dvdmovieapp.models
         /// <summary>
         /// movie title
         /// </summary>
-       public string Title { get; set; }         
+       public string Title { get; set; }
 
+        public Language Language { get; set; }
     }
 }
